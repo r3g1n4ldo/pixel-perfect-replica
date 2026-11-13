@@ -107,6 +107,15 @@ export const projects: Project[] = [
     ],
   },
   {
+    title: "Hookshot",
+    category: "Web",
+    description:
+      "Cliente de API que roda direto no navegador: monte requisições, gerencie ambientes, rode testes e simule endpoints (mock), tudo localmente.",
+    tags: ["HTTP/HTTPS", "REST", "Testes de API", "Mock"],
+    status: "no ar",
+    link: "https://hookshot.projetocode.com.br",
+  },
+  {
     title: "Ilimitado Lov AI",
     category: "Extensões",
     description: "Painel administrativo de chaves de acesso, limites e erros, com proxy de IA.",
@@ -266,11 +275,23 @@ export const filterProjects = (category: Category) =>
 export const stack = [
   {
     title: "Front-end",
-    items: ["HTML", "CSS", "JavaScript", "React", "TypeScript", "Tailwind", "shadcn/ui"],
+    items: [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React",
+      "TypeScript",
+      "Tailwind",
+      "shadcn/ui",
+      "Extensões MV3",
+    ],
   },
   { title: "Back-end e dados", items: ["Python", "Node/Next.js", "Supabase"] },
-  { title: "Extensões", items: ["Chrome/Edge", "Manifest V3"] },
   { title: "Automação", items: ["n8n", "Make", "webhooks", "Evolution API", "Telegram"] },
+  {
+    title: "APIs e HTTP",
+    items: ["requisições HTTP/HTTPS", "REST", "Postman", "Insomnia", "Hookshot (próprio)"],
+  },
   { title: "IA", items: ["Claude", "Claude Code", "Gemini", "OpenRouter", "ElevenLabs"] },
   {
     title: "Infra",
@@ -346,6 +367,7 @@ export const channels = [
 export const services = [
   "Suporte técnico e sistemas de franquia",
   "Automação de atendimento e vendas",
+  "Integração e testes de APIs",
   "Extensões de navegador e ferramentas internas",
   "Painéis de gestão para pequenos negócios",
   "Sites WordPress e redesign",

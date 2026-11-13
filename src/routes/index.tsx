@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
+  Webhook,
   Shield,
   ScanSearch,
   Database,
@@ -689,7 +690,8 @@ function Portfolio() {
           <div className="mt-8 grid gap-x-16 md:grid-cols-2">
             {services.map((s, i) => {
               const Icon =
-                [Headset, Bot, Puzzle, PanelsTopLeft, Braces, Server, Globe, Shield][i] ?? Headset;
+                [Headset, Bot, Webhook, Puzzle, PanelsTopLeft, Braces, Server, Globe, Shield][i] ??
+                Headset;
               return (
                 <div key={s} className="flex items-center gap-4 border-b border-border py-5">
                   <Icon size={20} className="shrink-0 text-primary" />
