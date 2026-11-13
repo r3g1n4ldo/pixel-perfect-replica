@@ -26,17 +26,17 @@ function Section({ id, title, subtitle, children }: { id: string; title: string;
 function Portfolio() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [category, setCategory] = useState<Category>('Todos');
-  const [typed, setTyped] = useState(roles[0]);
+  const [typed, setTyped] = useState(roles[0] ?? 'Suporte de TI');
   const [active, setActive] = useState('');
   const [contactNotice, setContactNotice] = useState('');
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    let role = 0; let text = roles[0].length; let deleting = true; let timer: ReturnType<typeof setTimeout>;
+    let role = 0; let text = (roles[0] ?? 'Suporte de TI').length; let deleting = true; let timer: ReturnType<typeof setTimeout>;
     const tick = () => {
-      const target = roles[role];
+      const target = roles[role] ?? roles[0] ?? "Suporte de TI";
       if (deleting) { text--; setTyped(target.slice(0, text)); if (text === 0) { deleting = false; role = (role + 1) % roles.length; } }
-      else { text++; setTyped(roles[role].slice(0, text)); if (text === roles[role].length) { deleting = true; timer = setTimeout(tick, 2100); return; } }
+      else { text++; setTyped(target.slice(0, text)); if (text === target.length) { deleting = true; timer = setTimeout(tick, 2100); return; } }
       timer = setTimeout(tick, deleting ? 45 : 85);
     };
     timer = setTimeout(tick, 2300);
@@ -109,9 +109,9 @@ function Portfolio() {
 
       <Section id="negocios" title="Empreender também é construir." subtitle="Duas lojas. Muitos problemas reais. Minhas próprias soluções."><div className="mt-9 grid gap-5 md:grid-cols-2">{businesses.map(b => <article key={b.title} className="business-card"><div className="mb-8 flex items-center justify-between"><Store size={30} strokeWidth={1.3} className="text-primary" /><span className="tag">{b.category}</span></div><h3 className="font-display text-2xl">{b.title}</h3><p className="body-copy mt-4">{b.description}</p></article>)}</div></Section>
 
-      <Section id="conteudo" title="Ideias em outros formatos." subtitle="Código não é a única forma de criar."><div className="channel-grid">{channels.map((c, i) => { const Icon = [ScanLine, Globe, Clapperboard, Building2][i]; return <article key={c.title} className="channel"><span className="font-mono text-[9px] text-muted-foreground">{c.label}</span><div className="channel-visual"><Icon size={52} strokeWidth={1} /></div><div><Play size={14} className="mb-4 text-primary" /><h3 className="font-display text-2xl leading-tight">{c.title}</h3><p className="mt-3 text-xs leading-5 text-muted-foreground">{c.subtitle}</p></div></article>; })}</div><p className="mt-7 font-mono text-xs leading-6 text-muted-foreground">Também crio roteiros, prompts de imagem, cardápios e divulgação para pequenos negócios.</p></Section>
+      <Section id="conteudo" title="Ideias em outros formatos." subtitle="Código não é a única forma de criar."><div className="channel-grid">{channels.map((c, i) => { const Icon = [ScanLine, Globe, Clapperboard, Building2][i] ?? ScanLine; return <article key={c.title} className="channel"><span className="font-mono text-[9px] text-muted-foreground">{c.label}</span><div className="channel-visual"><Icon size={52} strokeWidth={1} /></div><div><Play size={14} className="mb-4 text-primary" /><h3 className="font-display text-2xl leading-tight">{c.title}</h3><p className="mt-3 text-xs leading-5 text-muted-foreground">{c.subtitle}</p></div></article>; })}</div><p className="mt-7 font-mono text-xs leading-6 text-muted-foreground">Também crio roteiros, prompts de imagem, cardápios e divulgação para pequenos negócios.</p></Section>
 
-      <Section id="posso-ajudar" title="Posso ajudar com"><div className="mt-8 grid gap-x-16 md:grid-cols-2">{services.map((s, i) => { const Icon = [Headset, Bot, Puzzle, PanelsTopLeft, Braces, Server][i]; return <div key={s} className="flex items-center gap-4 border-b border-border py-5"><Icon size={20} className="shrink-0 text-primary" /><p className="text-sm">{s}</p><Check size={14} className="ml-auto shrink-0 text-muted-foreground" /></div>; })}</div></Section>
+      <Section id="posso-ajudar" title="Posso ajudar com"><div className="mt-8 grid gap-x-16 md:grid-cols-2">{services.map((s, i) => { const Icon = [Headset, Bot, Puzzle, PanelsTopLeft, Braces, Server][i] ?? Headset; return <div key={s} className="flex items-center gap-4 border-b border-border py-5"><Icon size={20} className="shrink-0 text-primary" /><p className="text-sm">{s}</p><Check size={14} className="ml-auto shrink-0 text-muted-foreground" /></div>; })}</div></Section>
 
       <Section id="contato" title="Vamos construir algo?" subtitle="Um problema pra resolver, uma ideia pra tirar do papel. Vamos conversar."><div className="mt-9 flex flex-wrap gap-3">{Object.entries(contactLinks).map(([name, href]) => { const Icon = contactIcons[name as keyof typeof contactIcons]; return <Button key={name} asChild variant={name === 'WhatsApp' ? 'portfolio' : 'portfolioOutline'}><a href={href} aria-label={`${name}${href === '#' ? ', link ainda não configurado' : ''}`} onClick={e => { if (href === '#') { e.preventDefault(); setContactNotice(`O contato por ${name} será disponibilizado em breve.`); } }}><Icon />{name}<ArrowUpRight /></a></Button>; })}</div><p className="mt-5 min-h-5 font-mono text-xs text-muted-foreground" role="status">{contactNotice}</p></Section>
     </main>
