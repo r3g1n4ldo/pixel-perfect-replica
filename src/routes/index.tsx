@@ -33,7 +33,6 @@ import {
   Instagram,
   Music2,
   Headset,
-  Webhook,
   Workflow,
   PanelsTopLeft,
   Braces,
@@ -748,7 +747,7 @@ function Portfolio() {
           <div className="mt-8 grid gap-x-16 md:grid-cols-2">
             {services.map((s, i) => {
               const Icon =
-                [Headset, Bot, Webhook, Puzzle, PanelsTopLeft, Braces, Server, Globe, Shield][i] ??
+                [Headset, Bot, Workflow, Puzzle, PanelsTopLeft, Braces, Server, Globe, Shield][i] ??
                 Headset;
               return (
                 <div key={s} className="flex items-center gap-4 border-b border-border py-5">
