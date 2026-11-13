@@ -116,6 +116,14 @@ export const projects: Project[] = [
     link: "https://hookshot.projetocode.com.br",
   },
   {
+    title: "IA Continental",
+    category: "Web",
+    description:
+      "Minha própria IA: um chat no estilo Claude e ChatGPT, com front em Node feito no Lovable e back-end próprio rodando em Docker com Supabase.",
+    tags: ["IA", "Node", "Lovable", "Docker", "Supabase"],
+    status: "no ar",
+  },
+  {
     title: "Ilimitado Lov AI",
     category: "Extensões",
     description: "Painel administrativo de chaves de acesso, limites e erros, com proxy de IA.",
