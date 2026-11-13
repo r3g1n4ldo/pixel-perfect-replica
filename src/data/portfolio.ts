@@ -303,7 +303,17 @@ export const stack = [
   { title: "IA", items: ["Claude", "Claude Code", "Gemini", "OpenRouter", "ElevenLabs"] },
   {
     title: "Infra",
-    items: ["Linux/Ubuntu", "Docker", "Portainer", "Coolify", "VPS", "SSH", "Netdata", "Railway"],
+    items: [
+      "Linux (Ubuntu, Debian, Fedora)",
+      "configuração de servidores",
+      "Docker",
+      "Portainer",
+      "Coolify",
+      "VPS",
+      "SSH",
+      "Netdata",
+      "Railway",
+    ],
   },
   {
     title: "Cloud, DNS e e-mail",

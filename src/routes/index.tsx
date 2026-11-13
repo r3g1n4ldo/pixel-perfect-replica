@@ -385,9 +385,9 @@ function Portfolio() {
               </p>
               <p className="mt-4">
                 Prototipo com IA (Claude, Claude Code, Lovable, Gemini) e coloco em produção em
-                servidor próprio (Ubuntu, VPS, Docker, SSH), publicando com domínio, DNS e
-                Cloudflare Tunnel, e itero até funcionar de verdade. Cursando Análise e
-                Desenvolvimento de Sistemas.
+                servidor próprio (Linux Ubuntu, Debian e Fedora, VPS, Docker, SSH), publicando com
+                domínio, DNS e Cloudflare Tunnel, e itero até funcionar de verdade. Cursando Análise
+                e Desenvolvimento de Sistemas.
               </p>
               <blockquote className="mt-6 flex gap-3 font-display text-lg text-foreground">
                 <span className="font-mono text-primary">“</span>Soluções simples, que funcionam de
