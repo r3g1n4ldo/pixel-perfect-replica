@@ -28,3 +28,7 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Portfolio architecture
+- Keep portfolio content in `src/data/portfolio.ts` and render the single-page experience at `/`; this separates editable content from presentation.
+- Keep interactions client-side with no backend; project filtering and navigation require no stored user data.
