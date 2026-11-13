@@ -647,3 +647,9 @@ a:focus-visible {
     position: static;
   }
 }
+
+@media (min-width: 1280px) {
+  .stack-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}

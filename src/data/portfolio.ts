@@ -27,6 +27,7 @@ export const sectionId = (label: string) =>
 export const roles = [
   "Suporte de TI",
   "Infraestrutura",
+  "Cloudflare & DNS",
   "Automação",
   "Extensões de Chrome",
   "Empreendedor",
@@ -214,6 +215,20 @@ export const projects: Project[] = [
     tags: ["Linux", "Docker"],
   },
   {
+    title: "Cloudflare, domínios e DNS",
+    category: "Infra",
+    description:
+      "Publicação dos meus serviços com domínio próprio: registros DNS, SSL, proxy, Cloudflare Tunnel sem abrir portas, roteamento de e-mail e painéis próprios de túneis, IPs e e-mail temporário via API da Cloudflare.",
+    tags: ["Cloudflare", "DNS", "Tunnel", "SSL/TLS", "Cloudflare API"],
+  },
+  {
+    title: "Deploy em nuvem",
+    category: "Infra",
+    description:
+      "Aplicações no ar em VPS, Railway, Supabase e Hostinger, com variáveis de ambiente, domínios personalizados, webhooks e migração de bancos entre projetos.",
+    tags: ["Railway", "Supabase", "VPS", "Hostinger"],
+  },
+  {
     title: "Gravaai",
     category: "Web",
     description: "PWA de gravação de tela com áudio da aba e microfone, com exportação em MP4.",
@@ -259,15 +274,19 @@ export const stack = [
   { title: "IA", items: ["Claude", "Claude Code", "Gemini", "OpenRouter", "ElevenLabs"] },
   {
     title: "Infra",
+    items: ["Linux/Ubuntu", "Docker", "Portainer", "VPS", "SSH", "Netdata", "Railway"],
+  },
+  {
+    title: "Cloud, domínios e DNS",
     items: [
-      "Linux/Ubuntu",
-      "Docker",
-      "Portainer",
-      "VPS",
-      "SSH",
+      "Cloudflare",
       "Cloudflare Tunnel",
-      "Netdata",
-      "Railway",
+      "DNS (A, CNAME, MX, TXT)",
+      "SSL/TLS",
+      "proxy reverso",
+      "Email Routing",
+      "API da Cloudflare",
+      "domínios",
     ],
   },
   { title: "Web", items: ["WordPress", "Elementor", "Hostinger", "CyberPanel"] },
@@ -331,6 +350,7 @@ export const services = [
   "Painéis de gestão para pequenos negócios",
   "Sites WordPress e redesign",
   "Servidor, Docker e self-hosting",
+  "Domínios, DNS, Cloudflare e publicação de aplicações",
   "Revisão de segurança de apps Supabase e extensões",
 ];
 export const security = [
@@ -390,7 +410,7 @@ export const securitySection = {
   ],
   result: "scan concluído · 0 críticos",
 };
-export const heroStack = "Docker · Supabase · n8n · MV3 · Burp Suite";
+export const heroStack = "Docker · Cloudflare · Supabase · n8n · MV3";
 export const projectLabels = {
   problem: "Problema",
   solution: "Solução",

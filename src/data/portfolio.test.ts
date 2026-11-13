@@ -3,13 +3,13 @@ import { filterProjects, projects, projectStatus, security } from "./portfolio";
 
 describe("Portfolio project filters", () => {
   it("Todos includes every project", () => {
-    expect(filterProjects("Todos")).toHaveLength(25);
+    expect(filterProjects("Todos")).toHaveLength(27);
   });
   it.each([
     ["Extensões", 12],
     ["Finanças", 3],
     ["Automação", 3],
-    ["Infra", 2],
+    ["Infra", 4],
     ["Web", 4],
     ["Segurança", 1],
   ] as const)("filters %s projects without including other categories", (category, count) => {

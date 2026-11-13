@@ -384,8 +384,9 @@ function Portfolio() {
               </p>
               <p className="mt-4">
                 Prototipo com IA (Claude, Claude Code, Lovable, Gemini) e coloco em produção em
-                servidor próprio (Ubuntu, VPS, Docker, SSH), iterando até funcionar de verdade.
-                Cursando Análise e Desenvolvimento de Sistemas.
+                servidor próprio (Ubuntu, VPS, Docker, SSH), publicando com domínio, DNS e
+                Cloudflare Tunnel, e itero até funcionar de verdade. Cursando Análise e
+                Desenvolvimento de Sistemas.
               </p>
               <blockquote className="mt-6 flex gap-3 font-display text-lg text-foreground">
                 <span className="font-mono text-primary">“</span>Soluções simples, que funcionam de
@@ -542,7 +543,9 @@ function Portfolio() {
             {stack.map((s, i) => (
               <div className="stack-block" key={s.title}>
                 <h3 className="mb-4 flex items-center gap-3 font-display text-base">
-                  <span className="font-mono text-[10px] text-primary">0{i + 1}</span>
+                  <span className="font-mono text-[10px] text-primary">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                   {s.title}
                 </h3>
                 <div className="flex flex-wrap gap-2">
@@ -560,7 +563,9 @@ function Portfolio() {
             <div className="mt-6 grid grid-cols-2 gap-7 md:grid-cols-4">
               {workflow.map((w, i) => (
                 <div key={w}>
-                  <span className="font-mono text-2xl text-primary">0{i + 1}</span>
+                  <span className="font-mono text-2xl text-primary">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                   <p className="mt-3 text-sm">{w}</p>
                 </div>
               ))}
@@ -684,7 +689,7 @@ function Portfolio() {
           <div className="mt-8 grid gap-x-16 md:grid-cols-2">
             {services.map((s, i) => {
               const Icon =
-                [Headset, Bot, Puzzle, PanelsTopLeft, Braces, Server, Shield][i] ?? Headset;
+                [Headset, Bot, Puzzle, PanelsTopLeft, Braces, Server, Globe, Shield][i] ?? Headset;
               return (
                 <div key={s} className="flex items-center gap-4 border-b border-border py-5">
                   <Icon size={20} className="shrink-0 text-primary" />
