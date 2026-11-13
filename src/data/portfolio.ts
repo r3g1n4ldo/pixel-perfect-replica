@@ -242,8 +242,8 @@ export const projects: Project[] = [
     title: "Deploy em nuvem",
     category: "Infra",
     description:
-      "Aplicações no ar em VPS, Railway, Supabase e Hostinger, com variáveis de ambiente, domínios personalizados, webhooks e migração de bancos entre projetos.",
-    tags: ["Railway", "Supabase", "VPS", "Hostinger"],
+      "Aplicações no ar em VPS (com Portainer e Coolify), Railway, Supabase e Hostinger, com variáveis de ambiente, domínios personalizados, webhooks e migração de bancos entre projetos.",
+    tags: ["Coolify", "Portainer", "Railway", "Supabase", "VPS"],
   },
   {
     title: "Gravaai",
@@ -303,7 +303,7 @@ export const stack = [
   { title: "IA", items: ["Claude", "Claude Code", "Gemini", "OpenRouter", "ElevenLabs"] },
   {
     title: "Infra",
-    items: ["Linux/Ubuntu", "Docker", "Portainer", "VPS", "SSH", "Netdata", "Railway"],
+    items: ["Linux/Ubuntu", "Docker", "Portainer", "Coolify", "VPS", "SSH", "Netdata", "Railway"],
   },
   {
     title: "Cloud, DNS e e-mail",
