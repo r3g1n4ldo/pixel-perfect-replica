@@ -32,3 +32,6 @@ use the editor.
 ## Portfolio architecture
 - Keep portfolio content in `src/data/portfolio.ts` and render the single-page experience at `/`; this separates editable content from presentation.
 - Keep interactions client-side with no backend; project filtering and navigation require no stored user data.
+
+- Keep project detail dialogs, optional media/links, and status resolution driven by the portfolio data module; presentation must not invent deployment status.
+- Mark JavaScript availability before first paint and keep reveal elements visible without JavaScript or with reduced motion; this prevents a visible-to-hidden loading flash.
