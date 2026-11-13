@@ -12,7 +12,6 @@ export const navigation = [
   "Projetos",
   "Stack",
   "Segurança",
-  "Negócios",
   "Conteúdo",
   "Posso ajudar",
   "Contato",
@@ -30,7 +29,6 @@ export const roles = [
   "Cloudflare & DNS",
   "Automação",
   "Extensões de Chrome",
-  "Empreendedor",
 ];
 export const categories = [
   "Todos",
@@ -187,9 +185,9 @@ export const projects: Project[] = [
     status: "em desenvolvimento",
   },
   {
-    title: "Caixa Burger & Açaí",
+    title: "Controle financeiro e precificação",
     category: "Finanças",
-    description: "Controle de gastos, lucro e ficha técnica de preços das minhas duas lojas.",
+    description: "Controle de gastos, lucro e ficha técnica de preços para pequenos negócios.",
     tags: ["HTML/JS", "Docker"],
   },
   {
@@ -352,7 +350,7 @@ export const stack = [
 ];
 export const metrics = [
   { value: "12+", label: "extensões de Chrome" },
-  { value: "02", label: "lojas próprias" },
+  { value: String(projects.length), label: "projetos no portfólio" },
   { value: "07", label: "frentes de segurança" },
   { value: "01", label: "servidor próprio 24/7" },
 ];
@@ -361,19 +359,6 @@ export const workflow = [
   "Prototipo com IA",
   "Rodo na minha infra",
   "Itero até funcionar",
-];
-export const businesses = [
-  {
-    title: "Sabor Gaúcho",
-    category: "Hamburgueria",
-    description:
-      "Delivery pelo Pedidos10, foco em smash burger, com xis e cachorro-quente de volta ao cardápio. Pix via Mercado Pago e modelagem 3D da loja no SketchUp.",
-  },
-  {
-    title: "Maníacos do Açaí",
-    category: "Açaiteria",
-    description: "Minha segunda loja, gerida com as mesmas ferramentas internas que eu criei.",
-  },
 ];
 export const channels = [
   {

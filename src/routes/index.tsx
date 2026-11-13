@@ -25,7 +25,6 @@ import {
   Check,
   BriefcaseBusiness,
   GraduationCap,
-  Store,
   Play,
   Clapperboard,
   ScanLine,
@@ -68,7 +67,6 @@ import {
   stack,
   metrics,
   workflow,
-  businesses,
   channels,
   services,
   contactLinks,
@@ -82,7 +80,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Suporte de TI, extensões de Chrome, automações e infraestrutura. Conheça os projetos e negócios de Reginaldo Silva, em Santa Catarina.",
+          "Suporte de TI, extensões de Chrome, automações e infraestrutura. Conheça os projetos de Reginaldo Silva, em Santa Catarina.",
       },
       { property: "og:title", content: "Reginaldo Silva — Portfólio" },
       {
@@ -340,7 +338,7 @@ function Portfolio() {
                   <p className="terminal-output">
                     suporte de TI · dev de ferramentas
                     <br />
-                    dono de 2 lojas
+                    infra · automação · segurança
                   </p>
                   <p className="terminal-command">
                     <span className="text-primary">$</span> stack --top
@@ -380,8 +378,7 @@ function Portfolio() {
             <div className="body-copy">
               <p>
                 Trabalho com TI no dia a dia, dando suporte técnico a unidades franqueadas (PDV,
-                balanças, VTEX), e tenho negócios próprios: uma hamburgueria e uma açaiteria.
-                Resolvo problemas reais construindo as ferramentas necessárias.
+                balanças, VTEX). Resolvo problemas reais construindo as ferramentas necessárias.
               </p>
               <p className="mt-4">
                 Prototipo com IA (Claude, Claude Code, Lovable, Gemini) e coloco em produção em
@@ -640,25 +637,6 @@ function Portfolio() {
         </Section>
 
         <Section
-          id="negocios"
-          title="Empreender também é construir."
-          subtitle="Duas lojas. Muitos problemas reais. Minhas próprias soluções."
-        >
-          <div className="mt-9 grid gap-5 md:grid-cols-2">
-            {businesses.map((b) => (
-              <article key={b.title} className="business-card">
-                <div className="mb-8 flex items-center justify-between">
-                  <Store size={30} strokeWidth={1.3} className="text-primary" />
-                  <span className="tag">{b.category}</span>
-                </div>
-                <h3 className="font-display text-2xl">{b.title}</h3>
-                <p className="body-copy mt-4">{b.description}</p>
-              </article>
-            ))}
-          </div>
-        </Section>
-
-        <Section
           id="conteudo"
           title="Ideias em outros formatos."
           subtitle="Código não é a única forma de criar."
@@ -682,7 +660,7 @@ function Portfolio() {
             })}
           </div>
           <p className="mt-7 font-mono text-xs leading-6 text-muted-foreground">
-            Também crio roteiros, prompts de imagem, cardápios e divulgação para pequenos negócios.
+            Também crio roteiros, prompts de imagem, materiais de divulgação para pequenos negócios.
           </p>
         </Section>
 
