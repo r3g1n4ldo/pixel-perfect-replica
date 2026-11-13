@@ -293,7 +293,10 @@ export const stack = [
     ],
   },
   { title: "Back-end e dados", items: ["Python", "Node/Next.js", "Supabase"] },
-  { title: "Automação", items: ["n8n", "Make", "webhooks", "Evolution API", "Telegram"] },
+  {
+    title: "Automação",
+    items: ["n8n", "Make", "webhooks", "WhatsApp Cloud API (Meta)", "Evolution API", "Telegram"],
+  },
   {
     title: "APIs e HTTP",
     items: ["requisições HTTP/HTTPS", "REST", "Postman", "Insomnia", "Hookshot (próprio)"],
@@ -336,16 +339,7 @@ export const stack = [
   },
   {
     title: "Sistemas e pagamentos",
-    items: [
-      "PDV",
-      "balanças",
-      "VTEX",
-      "gateways de pagamento",
-      "Mercado Pago",
-      "Asaas",
-      "Stripe",
-      "Pix",
-    ],
+    items: ["PDV", "balanças", "VTEX", "gateways de pagamento", "Mercado Pago", "Asaas", "Stripe"],
   },
 ];
 export const metrics = [
@@ -384,7 +378,7 @@ export const channels = [
 ];
 export const services = [
   "Suporte técnico e sistemas de franquia",
-  "Automação de atendimento e vendas",
+  "Automação de atendimento e vendas no WhatsApp (API oficial da Meta)",
   "Integração e testes de APIs",
   "Extensões de navegador e ferramentas internas",
   "Painéis de gestão para pequenos negócios",
