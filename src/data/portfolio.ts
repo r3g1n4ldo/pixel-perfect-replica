@@ -306,7 +306,7 @@ export const stack = [
     items: ["Linux/Ubuntu", "Docker", "Portainer", "VPS", "SSH", "Netdata", "Railway"],
   },
   {
-    title: "Cloud, domínios e DNS",
+    title: "Cloud, DNS e e-mail",
     items: [
       "Cloudflare",
       "Cloudflare Tunnel",
@@ -314,6 +314,9 @@ export const stack = [
       "SSL/TLS",
       "proxy reverso",
       "Email Routing",
+      "Resend",
+      "SMTP",
+      "servidores de e-mail",
       "API da Cloudflare",
       "domínios",
     ],
@@ -380,7 +383,7 @@ export const services = [
   "Painéis de gestão para pequenos negócios",
   "Sites WordPress e redesign",
   "Servidor, Docker e self-hosting",
-  "Domínios, DNS, Cloudflare e publicação de aplicações",
+  "Domínios, DNS, e-mail (Resend e SMTP) e publicação de aplicações",
   "Revisão de segurança de apps Supabase e extensões",
 ];
 export const security = [
