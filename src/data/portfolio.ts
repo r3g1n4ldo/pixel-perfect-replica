@@ -336,7 +336,19 @@ export const stack = [
     title: "Segurança",
     items: ["Burp Suite", "Wireshark", "RLS", "análise de CVE", "varredura de portas"],
   },
-  { title: "Sistemas", items: ["PDV", "balanças", "VTEX", "Mercado Pago/Pix"] },
+  {
+    title: "Sistemas e pagamentos",
+    items: [
+      "PDV",
+      "balanças",
+      "VTEX",
+      "gateways de pagamento",
+      "Mercado Pago",
+      "Asaas",
+      "Stripe",
+      "Pix",
+    ],
+  },
 ];
 export const metrics = [
   { value: "12+", label: "extensões de Chrome" },
