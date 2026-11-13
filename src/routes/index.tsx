@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, useMemo, type ReactNode } from "react";
 import {
-  Webhook,
   Shield,
   ScanSearch,
   Database,
@@ -11,12 +10,10 @@ import {
   ArrowUp,
   ArrowUpRight,
   ArrowDown,
-  ArrowRight,
   Terminal,
   Menu,
   X,
   MapPin,
-  Code2,
   Puzzle,
   Bot,
   ChartNoAxesCombined,
@@ -39,8 +36,16 @@ import {
   Workflow,
   PanelsTopLeft,
   Braces,
+  Search,
+  Copy,
+  CheckCheck,
+  ExternalLink,
+  Cpu,
+  Layers,
+  Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Dialog,
   DialogContent,
@@ -56,8 +61,6 @@ import {
   projectStatus,
   shareImage,
   type Project,
-} from "@/data/portfolio";
-import {
   navigation,
   sectionId,
   roles,
@@ -144,9 +147,12 @@ function Portfolio() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [category, setCategory] = useState<Category>("Todos");
+  const [searchQuery, setSearchQuery] = useState("");
   const [typed, setTyped] = useState(roles[0] ?? "Suporte de TI");
   const [active, setActive] = useState("");
+  const [copiedLink, setCopiedLink] = useState<string | null>(null);
   const [contactNotice, setContactNotice] = useState("");
+  const [activeCommand, setActiveCommand] = useState<string>("vulnscan --defensive");
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -221,7 +227,49 @@ function Portfolio() {
     };
   }, []);
 
-  const visibleProjects = filterProjects(category);
+  const visibleProjects = useMemo(() => {
+    const catFiltered = filterProjects(category);
+    if (!searchQuery.trim()) return catFiltered;
+    const q = searchQuery.toLowerCase();
+    return catFiltered.filter(
+      (p) =>
+        p.title.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q) ||
+        p.tags.some((t) => t.toLowerCase().includes(q)),
+    );
+  }, [category, searchQuery]);
+
+  const copyToClipboard = (text: string, label: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedLink(label);
+    setTimeout(() => setCopiedLink(null), 2500);
+  };
+
+  const terminalOutputs: Record<string, { lines: string[]; result: string }> = {
+    "vulnscan --defensive": {
+      lines: securitySection.lines,
+      result: securitySection.result,
+    },
+    "check-rls --supabase": {
+      lines: [
+        "[ok] Supabase JWT auth verification: ACTIVE",
+        "[ok] RLS policies enforced on all user tables",
+        "[info] Realtime channel broadcast sanitized",
+      ],
+      result: "RLS & Supabase audit complete · 100% compliant",
+    },
+    "net-audit --cloudflare": {
+      lines: [
+        "[ok] Cloudflare Tunnel: zero open inbound ports",
+        "[ok] SSL/TLS Strict encryption mode active",
+        "[ok] DNSSEC verified on primary domain",
+      ],
+      result: "Cloudflare proxy active · zero port exposure",
+    },
+  };
+
+  const currentTerminalOutput = terminalOutputs[activeCommand] ?? terminalOutputs["vulnscan --defensive"];
+
   return (
     <>
       <header ref={headerRef} className="site-header sticky top-0 z-50 border-b border-border">
@@ -323,13 +371,12 @@ function Portfolio() {
               </div>
               <div className="terminal" aria-label="Resumo em terminal">
                 <div className="terminal-bar">
-                  <span className="terminal-dot" />
-                  <span className="terminal-dot" />
-                  <span className="terminal-dot" />
-                  <span className="mx-auto font-mono text-[10px] text-muted-foreground">
-                    reginaldo@servidor: ~
+                  <span className="terminal-dot red" />
+                  <span className="terminal-dot yellow" />
+                  <span className="terminal-dot green" />
+                  <span className="mx-auto font-mono text-[11px] text-muted-foreground flex items-center gap-1.5">
+                    <Terminal size={12} className="text-primary" /> reginaldo@vps-prod: ~
                   </span>
-                  <Terminal size={12} className="text-muted-foreground" />
                 </div>
                 <div className="terminal-body">
                   <p className="terminal-command">
@@ -347,16 +394,16 @@ function Portfolio() {
                   <p className="terminal-command">
                     <span className="text-primary">$</span> status
                   </p>
-                  <p className="text-primary">
-                    construindo algo novo
-                    <span className="cursor h-3! w-1.5!" />
+                  <p className="text-primary font-mono text-xs flex items-center gap-1">
+                    <Sparkles size={13} className="animate-spin" /> construindo algo novo
+                    <span className="cursor" />
                   </p>
                   <div className="terminal-bottom">
-                    <span>
+                    <span className="flex items-center">
                       <span className="status-dot" />
-                      todos os sistemas online
+                      sistemas online
                     </span>
-                    <span>↑ uptime 24/7</span>
+                    <span>uptime 24/7 (Docker/VPS)</span>
                   </div>
                 </div>
               </div>
@@ -441,24 +488,43 @@ function Portfolio() {
           title="Ferramentas que saíram do papel."
           subtitle="Problemas reais. Código em produção. Uma ideia de cada vez."
         >
-          <div className="my-8 flex flex-wrap items-center gap-2" aria-label="Filtrar projetos">
-            {categories.map((c) => (
-              <Button
-                key={c}
-                variant="filter"
-                data-active={category === c}
-                aria-pressed={category === c}
-                onClick={() => setCategory(c)}
-              >
-                {c}
-              </Button>
-            ))}
-            <span
-              className="ml-auto font-mono text-[10px] text-muted-foreground"
-              aria-live="polite"
-            >
-              {String(visibleProjects.length).padStart(2, "0")} projetos
+          <div className="my-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between" aria-label="Filtrar projetos">
+            <div className="flex flex-wrap items-center gap-2">
+              {categories.map((c) => (
+                <Button
+                  key={c}
+                  variant="filter"
+                  data-active={category === c}
+                  aria-pressed={category === c}
+                  onClick={() => setCategory(c)}
+                >
+                  {c}
+                </Button>
+              ))}
+            </div>
+            <div className="relative w-full sm:w-64">
+              <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+              <Input
+                type="text"
+                placeholder="Buscar projetos ou tags..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-9 h-9 font-mono text-xs bg-card border-border"
+              />
+            </div>
+          </div>
+          <div className="mb-6 flex items-center justify-between font-mono text-xs text-muted-foreground">
+            <span>
+              Exibindo <strong className="text-primary">{visibleProjects.length}</strong> de {projects.length} projetos
             </span>
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery("")}
+                className="text-xs text-primary hover:underline"
+              >
+                Limpar busca
+              </button>
+            )}
           </div>
           <div className="project-grid">
             {visibleProjects.map((p) => {
@@ -575,33 +641,46 @@ function Portfolio() {
           <div className="security-grid">
             <div
               className="terminal security-terminal"
-              aria-label="Varredura de segurança simulada"
+              aria-label="Varredura de segurança interativa"
             >
               <div className="terminal-bar">
                 <Shield size={16} className="text-primary" />
-                <span className="ml-2 font-mono text-[10px] text-muted-foreground">
+                <span className="ml-2 font-mono text-[11px] text-muted-foreground">
                   {securitySection.terminalTitle}
                 </span>
               </div>
               <div className="terminal-body">
-                <p className="mb-6 text-[9px] text-muted-foreground">
-                  {securitySection.simulation}
+                <div className="mb-5 flex flex-wrap gap-2 border-b border-border pb-4">
+                  <span className="text-[10px] font-mono text-muted-foreground w-full">EXEOUTAR COMANDO:</span>
+                  {Object.keys(terminalOutputs).map((cmd) => (
+                    <button
+                      key={cmd}
+                      onClick={() => setActiveCommand(cmd)}
+                      className={`font-mono text-[11px] px-2.5 py-1 rounded border transition-colors ${
+                        activeCommand === cmd
+                          ? "bg-primary text-primary-foreground border-primary"
+                          : "bg-background text-muted-foreground border-border hover:border-primary/50"
+                      }`}
+                    >
+                      $ {cmd.split(" ")[0]}
+                    </button>
+                  ))}
+                </div>
+                <p className="terminal-command mb-4">
+                  <span className="text-primary">$</span> {activeCommand}
                 </p>
-                <p className="terminal-command mb-7">
-                  <span className="text-primary">$</span> {securitySection.command}
-                </p>
-                <div className="space-y-6">
-                  {securitySection.lines.map((line) => (
+                <div className="space-y-3 min-h-24">
+                  {currentTerminalOutput.lines.map((line) => (
                     <p
                       key={line}
-                      className={line.startsWith("[!]") ? "text-warning" : "text-muted-foreground"}
+                      className={line.startsWith("[!]") ? "text-warning font-mono text-xs" : "text-muted-foreground font-mono text-xs"}
                     >
                       {line}
                     </p>
                   ))}
                 </div>
-                <p className="mt-9 border-t border-border pt-6 text-primary">
-                  {securitySection.result}
+                <p className="mt-6 border-t border-border pt-4 text-primary font-mono text-xs">
+                  {currentTerminalOutput.result}
                   <span className="cursor" />
                 </p>
               </div>
@@ -701,19 +780,25 @@ function Portfolio() {
                     onClick={(e) => {
                       if (href === "#") {
                         e.preventDefault();
-                        setContactNotice(`O contato por ${name} será disponibilizado em breve.`);
+                        if (name === "E-mail") {
+                          copyToClipboard("contato@reginaldo.dev", "E-mail");
+                          setContactNotice("E-mail fictício copiado para a área de transferência.");
+                        } else {
+                          setContactNotice(`O contato por ${name} será disponibilizado em breve.`);
+                        }
                       }
                     }}
                   >
                     <Icon />
                     {name}
-                    <ArrowUpRight />
+                    {href === "#" && name === "E-mail" ? <Copy size={13} className="ml-1" /> : <ArrowUpRight />}
                   </a>
                 </Button>
               );
             })}
           </div>
-          <p className="mt-5 min-h-5 font-mono text-xs text-muted-foreground" role="status">
+          <p className="mt-5 min-h-5 font-mono text-xs text-muted-foreground flex items-center gap-2" role="status">
+            {copiedLink && <CheckCheck size={14} className="text-primary" />}
             {contactNotice}
           </p>
         </Section>
